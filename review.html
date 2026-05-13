@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leave a Review — Black Forest Cafe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root { --primary:#1c1410; --accent:#c8813a; --accent-light:#e09a52; --cream:#f5efe6; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Inter',sans-serif;background:var(--cream);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem;}
+    .card{background:#fff;border-radius:24px;padding:3rem 2.5rem;max-width:480px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(28,20,16,0.1);}
+    .logo{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:800;color:var(--primary);margin-bottom:2rem;}
+    .logo span{color:var(--accent);}
+    h1{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:0.5rem;}
+    p{font-size:0.92rem;color:#6b5c4e;margin-bottom:2.5rem;line-height:1.6;}
+    .stars{display:flex;justify-content:center;gap:0.75rem;margin-bottom:0.75rem;}
+    .star{font-size:2.8rem;cursor:pointer;transition:transform 0.15s;line-height:1;}
+    .star:hover,.star.active{transform:scale(1.15);}
+    .hint{font-size:0.78rem;color:#9b8070;margin-bottom:2rem;}
+    a{text-decoration:none;}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">Black Forest <span>Cafe</span></div>
+    <h1>How did we do?</h1>
+    <p>Your feedback means everything to us. Tap the stars to rate your experience.</p>
+    <div class="stars" id="stars">
+      <span class="star" data-val="1">⭐</span>
+      <span class="star" data-val="2">⭐</span>
+      <span class="star" data-val="3">⭐</span>
+      <span class="star" data-val="4">⭐</span>
+      <span class="star" data-val="5">⭐</span>
+    </div>
+    <div class="hint" id="hint">Tap a star to rate</div>
+  </div>
+  <script>
+    const stars = document.querySelectorAll('.star');
+    const hint = document.getElementById('hint');
+    const labels = ['','Poor','Below average','Good','Great','Excellent!'];
+    const googleUrl = 'https://g.page/r/review';
+    stars.forEach(s => {
+      s.addEventListener('click', () => {
+        const val = parseInt(s.dataset.val);
+        hint.textContent = labels[val];
+        if (val >= 4) {
+          setTimeout(() => window.location.href = googleUrl, 400);
+        } else {
+          setTimeout(() => window.location.href = 'private.html?rating=' + val, 400);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
